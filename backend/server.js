@@ -23,5 +23,10 @@ const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, async () => {
     console.log(`Server running on port ${PORT}`);
-    await connectDB();
 });
+
+// Force database connection for Vercel Serverless lambda
+connectDB();
+
+// Export the application for Vercel
+export default app;
