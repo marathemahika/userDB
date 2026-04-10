@@ -14,19 +14,34 @@ app.use(cors({
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials: true
 }));
-app.use(express.json()); // Parses incoming JSON requests
 
-// Routes
-app.use('/api/users', userRoutes);
+app.use(express.json());
 
+// ✅ CONNECT DB ONLY ONCE (important for Vercel)
+let isConnected = false;
+
+const connectOnce = async () => {
+    if (!isConnected) {
+        await connectDB();
+        isConnected = true;
+        console.log("MongoDB connected");
+    }
+};
+
+app.use(async (req, res, next) => {
+    await connectOnce();
+    next();
+});
+
+// ✅ ROOT ROUTE (so no blank screen)
 app.get("/", (req, res) => {
     res.send("Server is running 🚀");
 });
 
-const PORT = process.env.PORT || 3000;
+// Routes
+app.use('/api/users', userRoutes);
 
-// Force database connection for Vercel Serverless lambda
-connectDB();
+// ❌ DO NOT USE app.listen() in Vercel
 
-// Export the application for Vercel
+// Export for Vercel
 export default app;
