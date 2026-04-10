@@ -10,7 +10,7 @@ const app = express();
 
 // Middleware
 app.use(cors({
-    origin: ['http://localhost:5173', 'https://marathemahika.github.io'],
+    origin: ['http://localhost:3000', 'https://marathemahika.github.io'],
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials: true
 }));
@@ -19,7 +19,11 @@ app.use(express.json()); // Parses incoming JSON requests
 // Routes
 app.use('/api/users', userRoutes);
 
-const PORT = process.env.PORT || 5173;
+app.get("/", (req, res) => {
+    res.send("Server is running 🚀");
+});
+
+const PORT = process.env.PORT || 3000;
 
 // Force database connection for Vercel Serverless lambda
 connectDB();
