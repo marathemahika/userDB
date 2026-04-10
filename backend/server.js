@@ -41,7 +41,5 @@ app.get("/", (req, res) => {
 // Routes
 app.use('/api/users', userRoutes);
 
-// ❌ DO NOT USE app.listen() in Vercel
-
 // Export for Vercel
 export default app;
