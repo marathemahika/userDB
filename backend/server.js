@@ -10,9 +10,12 @@ const app = express();
 
 // Middleware
 app.use(cors({
-    origin: ['http://localhost:3000', 'https://marathemahika.github.io'],
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    credentials: true
+  origin: [
+    'http://localhost:3000',
+    'https://marathemahika.github.io',
+    'https://user-db-two.vercel.app'
+  ],
+  credentials: true
 }));
 
 app.use(express.json());
