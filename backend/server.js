@@ -13,7 +13,8 @@ app.use(cors({
   origin: [
     'http://localhost:3000',
     'https://marathemahika.github.io',
-    'https://user-db-two.vercel.app'
+    'https://user-db-two.vercel.app',
+    'https://user-db-pxeh.vercel.app'
   ],
   credentials: true
 }));
