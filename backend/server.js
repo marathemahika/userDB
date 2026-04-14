@@ -44,5 +44,7 @@ app.get("/", (req, res) => {
 // Routes
 app.use('/api/users', userRoutes);
 
-// Export for Vercel
-export default app;
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
